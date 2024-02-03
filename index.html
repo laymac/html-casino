@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Казино</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        #result {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="result">Угадай цвет: </div>
+    <button onclick="playGame('red')">Красный</button>
+    <button onclick="playGame('green')">Зеленый</button>
+    <button onclick="playGame('black')">Черный</button>
+
+    <script>
+        let greenAppeared = false;
+
+        function playGame(guess) {
+            const randomNumber = Math.floor(Math.random() * 10); // Генерируем случайное число от 0 до 9
+
+            let resultMessage = "Выпал цвет: ";
+
+            if (randomNumber === 0 && !greenAppeared) {
+                resultMessage += "Зеленый";
+                greenAppeared = true;
+            } else if (randomNumber % 2 === 0) {
+                resultMessage += "Красный!";
+            } else {
+                resultMessage += "Черный!";
+            }
+
+            resultMessage += "\nВаш выбор: " + guess;
+
+            if (resultMessage.toLowerCase().includes(guess.toLowerCase())) {
+                resultMessage += "\nВы угадали! Поздравляю!";
+            } else {
+                resultMessage += "\nВы не угадали. Попробуйте еще раз.";
+            }
+
+            document.getElementById("result").innerText = resultMessage;
+        }
+    </script>
+</body>
+</html>
